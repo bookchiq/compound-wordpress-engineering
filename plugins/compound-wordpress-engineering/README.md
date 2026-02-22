@@ -8,16 +8,16 @@ Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/c
 
 | Component | Count |
 |-----------|-------|
-| Agents | 27 |
+| Agents | 28 |
 | Commands | 22 |
-| Skills | 16 |
+| Skills | 17 |
 | MCP Servers | 1 |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (16)
+### Review (17)
 
 | Agent | Description |
 |-------|-------------|
@@ -37,6 +37,7 @@ Agents are organized into categories for easier discovery.
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
 | `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
+| `wp-ai-building-blocks-reviewer` | Review code using Abilities API, AI Client SDK, and MCP Adapter |
 
 ### Research (5)
 
@@ -106,6 +107,7 @@ Agents are organized into categories for easier discovery.
 |-------|-------------|
 | `wp-development-patterns` | WordPress patterns, coding standards, and best practices |
 | `setup` | Configure review agents for your WordPress project |
+| `wp-ai-building-blocks` | Abilities API, AI Client SDK, MCP Adapter, and AI Experiments reference |
 
 ### Architecture & Tools
 
@@ -142,6 +144,7 @@ Agents are organized into categories for easier discovery.
 - **Enhanced security-sentinel** with nonces, capabilities, sanitization/escaping
 - **Enhanced performance-oracle** with WP_Query, caching, hook placement patterns
 - **WordPress setup skill** auto-detects plugin/theme/block projects
+- **AI Building Blocks support** — Abilities API, AI Client SDK, MCP Adapter review agent + skill with 4 reference files
 - **wp-development-patterns skill** with 7 reference files
 
 ## MCP Servers

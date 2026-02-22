@@ -5,6 +5,16 @@ All notable changes to the compound-wordpress-engineering plugin will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-22
+
+### Added
+- `wp-ai-building-blocks` skill with 4 reference files:
+  - abilities-api.md — Abilities API registration, schemas, REST API, JavaScript client
+  - ai-client-sdk.md — WP_AI_Client_Prompt_Builder, provider-agnostic generation, function calling
+  - mcp-adapter.md — MCP server creation, transports, client configuration, security
+  - building-blocks-architecture.md — How the four building blocks work together
+- `wp-ai-building-blocks-reviewer` agent — Reviews code using Abilities API, AI Client SDK, and MCP Adapter for hook timing, schema correctness, permission callbacks, provider-agnostic patterns, and security
+
 ## [1.0.1] - 2026-02-21
 
 Synced framework-agnostic improvements from upstream EveryInc/compound-engineering-plugin.
