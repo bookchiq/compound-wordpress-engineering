@@ -159,6 +159,57 @@ Agents are organized into categories for easier discovery.
 claude /plugin install compound-wordpress-engineering
 ```
 
+## Recommended Companion Skills
+
+This plugin focuses on review agents, workflow automation, and compounding knowledge. For deep WordPress API reference and testing coverage, install these community skills alongside it:
+
+### Official WordPress Collection
+
+The [`wordpress/agent-skills`](https://github.com/wordpress/agent-skills) collection covers areas this plugin intentionally doesn't duplicate:
+
+```bash
+# Interactivity API — directives, stores, server-side rendering
+npx skills add https://github.com/wordpress/agent-skills --skill wp-interactivity-api
+
+# REST API — custom endpoints, validation, authentication, schemas
+npx skills add https://github.com/wordpress/agent-skills --skill wp-rest-api
+
+# WP-CLI & Ops — migrations, search-replace, multisite, cron
+npx skills add https://github.com/wordpress/agent-skills --skill wp-wpcli-and-ops
+
+# PHPStan — static analysis with WordPress-specific type annotations
+npx skills add https://github.com/wordpress/agent-skills --skill wp-phpstan
+
+# Playground — disposable local WordPress instances for testing
+npx skills add https://github.com/wordpress/agent-skills --skill wp-playground
+
+# Block development — scaffolding, block.json, dynamic blocks, deprecations
+npx skills add https://github.com/wordpress/agent-skills --skill wp-block-development
+
+# Block themes — theme.json, templates, patterns, style variations
+npx skills add https://github.com/wordpress/agent-skills --skill wp-block-themes
+
+# Performance — backend profiling, WP-CLI doctor, Query Monitor
+npx skills add https://github.com/wordpress/agent-skills --skill wp-performance
+
+# Plugin development — architecture, lifecycle, admin UI, security
+npx skills add https://github.com/wordpress/agent-skills --skill wp-plugin-development
+```
+
+### Testing & QA
+
+```bash
+# PHPUnit, WP_Mock, PHPCS, GitHub Actions CI/CD for WordPress
+npx skills add https://github.com/bobmatnyc/claude-mpm-skills --skill wordpress-testing-qa
+```
+
+### WordPress.org Compliance
+
+```bash
+# Plugin directory guidelines — free vs premium, review rules
+npx skills add https://github.com/bonny/wordpress-simple-history --skill wordpress-org-compliance
+```
+
 ## Credits
 
 Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) by Kieran Klaassen.
