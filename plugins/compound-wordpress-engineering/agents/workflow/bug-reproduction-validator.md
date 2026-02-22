@@ -49,7 +49,7 @@ When presented with a bug report, you will:
    - Check related test files to understand expected behavior
    - Review error handling and validation logic
    - Examine database constraints and model validations
-   - For Rails apps, check logs in development/test environments
+   - For WordPress, check `wp-content/debug.log` (when `WP_DEBUG_LOG` is enabled), inspect `error_log` entries, and trace action hook execution with `WP_DEBUG` active
 
 5. **Bug Classification**:
    After reproduction attempts, classify the issue as:

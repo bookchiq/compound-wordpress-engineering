@@ -203,9 +203,9 @@ docs/
 │   └── main.js          # Interactivity (theme toggle, mobile nav)
 └── pages/
     ├── getting-started.html  # Installation and quick start
-    ├── agents.html           # All 24 agents reference
-    ├── commands.html         # All 13 commands reference
-    ├── skills.html           # All 11 skills reference
+    ├── agents.html           # All 29 agents reference
+    ├── commands.html         # All 21 commands reference
+    ├── skills.html           # All 17 skills reference
     ├── mcp-servers.html      # MCP servers reference
     └── changelog.html        # Version history
 ```
@@ -273,7 +273,7 @@ python -m http.server 8000
 3. Test agents and commands:
    ```bash
    claude /review
-   claude agent kieran-rails-reviewer "test message"
+   claude agent wp-php-reviewer "test message"
    ```
 
 ### Validate JSON

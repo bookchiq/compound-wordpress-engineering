@@ -21,7 +21,7 @@ This command creates professional video walkthroughs of features for PR document
 ## Prerequisites
 
 <requirements>
-- Local development server running (e.g., `bin/dev`, `rails server`)
+- Local development server running (e.g., `wp-env start`, Local by Flywheel, MAMP, or similar)
 - agent-browser CLI installed
 - Git repository with a PR to document
 - `ffmpeg` installed (for video conversion)
@@ -76,14 +76,16 @@ gh pr view [number] --json title,body,files,headRefName -q '.'
 gh pr view [number] --json files -q '.files[].path'
 ```
 
-**Map files to testable routes** (same as playwright-test):
+**Map files to testable routes:**
 
 | File Pattern | Route(s) |
 |-------------|----------|
-| `app/views/users/*` | `/users`, `/users/:id`, `/users/new` |
-| `app/controllers/settings_controller.rb` | `/settings` |
-| `app/javascript/controllers/*_controller.js` | Pages using that Stimulus controller |
-| `app/components/*_component.rb` | Pages rendering that component |
+| `wp-content/plugins/*/admin/*.php` | `/wp-admin/admin.php?page=*` |
+| `wp-content/themes/*/template-*.php` | Front-end pages using that template |
+| `wp-content/themes/*/page-*.php` | `/page-slug/` |
+| `src/blocks/*/` | Block editor (create post with that block) |
+| `wp-content/plugins/*/includes/rest-*.php` | REST API endpoints |
+| `wp-content/themes/*/parts/*.html` | Pages rendering that template part |
 
 </gather_context>
 

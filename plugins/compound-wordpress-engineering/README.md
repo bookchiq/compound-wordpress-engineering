@@ -9,7 +9,7 @@ Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/c
 | Component | Count |
 |-----------|-------|
 | Agents | 29 |
-| Commands | 22 |
+| Commands | 21 |
 | Skills | 17 |
 | MCP Servers | 1 |
 
@@ -95,7 +95,6 @@ Agents are organized into categories for easier discovery.
 | `/resolve_todo_parallel` | Resolve todos in parallel |
 | `/triage` | Triage and prioritize issues |
 | `/test-browser` | Run browser tests on PR-affected pages |
-| `/xcode-test` | Build and test iOS apps on simulator |
 | `/feature-video` | Record video walkthroughs |
 | `/agent-native-audit` | Run agent-native architecture review |
 | `/deploy-docs` | Validate docs for GitHub Pages |

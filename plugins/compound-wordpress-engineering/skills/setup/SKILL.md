@@ -112,6 +112,8 @@ options:
     description: "Over-engineering, YAGNI violations (code-simplicity-reviewer)"
   - label: "Traceability"
     description: "End-to-end call chain verification, dead code detection (call-chain-verifier, pattern-recognition-specialist)"
+  - label: "Data safety"
+    description: "Migration validation, deployment checklists, ID mapping verification (data-migration-expert, deployment-verification-agent)"
 ```
 
 **c. Depth:**
@@ -144,11 +146,12 @@ options:
 - Architecture → `architecture-strategist`
 - Code simplicity → `code-simplicity-reviewer`
 - Traceability → `call-chain-verifier, pattern-recognition-specialist`
+- Data safety → `data-migration-expert, deployment-verification-agent`
 
 **Depth:**
 - Thorough: stack + selected focus areas
 - Fast: stack + `code-simplicity-reviewer` only
-- Comprehensive: all above + `git-history-analyzer, data-integrity-guardian, agent-native-reviewer, schema-drift-detector, call-chain-verifier, pattern-recognition-specialist`
+- Comprehensive: all above + `git-history-analyzer, data-integrity-guardian, agent-native-reviewer, schema-drift-detector, call-chain-verifier, pattern-recognition-specialist, data-migration-expert, deployment-verification-agent, wp-ai-building-blocks-reviewer`
 
 **Plan review agents:** stack-specific reviewer + `code-simplicity-reviewer`.
 

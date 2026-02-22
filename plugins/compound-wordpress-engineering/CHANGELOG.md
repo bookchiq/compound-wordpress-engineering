@@ -5,6 +5,21 @@ All notable changes to the compound-wordpress-engineering plugin will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-22
+
+### Fixed
+- `reproduce-bug` command — Complete rewrite: removed Rails agents (`rails-console-explorer`, `appsignal-log-investigator`), Playwright MCP tools, `bin/dev` reference, and Rails file paths; replaced with WordPress debug log, WP-CLI, agent-browser CLI, and WordPress file patterns
+- `deploy-docs` command — Fixed all 10+ wrong paths (`plugins/compound-engineering/` → `plugins/compound-wordpress-engineering/` and `docs/`); fixed GitHub Pages URL from upstream to `bookchiq.github.io/compound-engineering-plugin/`
+- `report-bug` command — Fixed repo from `EveryInc/compound-engineering-plugin` to `bookchiq/compound-engineering-plugin`; updated title prefix, maintainer reference, and output URLs
+- `feature-video` command — Replaced `bin/dev`/`rails server` prerequisites with WordPress dev servers (`wp-env start`, Local, MAMP); replaced Rails route mapping table with WordPress patterns (`wp-content/plugins/*/admin/*.php`, `src/blocks/*/`, etc.)
+- `changelog` command — Removed reference to non-existent `EVERY_WRITE_STYLE.md` style guide; replaced with generic review guidance
+- `bug-reproduction-validator` agent — Replaced "For Rails apps, check logs" with WordPress-specific debug log and hook tracing guidance
+- `setup` skill — Added `data-migration-expert`, `deployment-verification-agent`, and `wp-ai-building-blocks-reviewer` to Comprehensive depth preset; added "Data safety" focus area
+- Root `CLAUDE.md` — Fixed stale doc structure comments (24→29 agents, 13→21 commands, 11→17 skills); replaced `kieran-rails-reviewer` test example with `wp-php-reviewer`
+
+### Removed
+- `test-xcode` command — iOS/Xcode testing command not applicable to WordPress (commands: 22 → 21)
+
 ## [1.2.2] - 2026-02-22
 
 ### Fixed

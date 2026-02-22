@@ -95,9 +95,9 @@ Your final output should be formatted as follows:
 
 </change_log>
 
-## Style Guide Review
+## Final Review
 
-Now review the changelog using the EVERY_WRITE_STYLE.md file and go one by one to make sure you are following the style guide. Use multiple agents, run in parallel to make it faster.
+Review the changelog for clarity, accuracy, and consistent formatting. Ensure all PR numbers are correct and contributor names are spelled properly.
 
 Remember, your final output should only include the content within the <change_log> tags. Do not include any of your thought process or the original data in the output.
 
