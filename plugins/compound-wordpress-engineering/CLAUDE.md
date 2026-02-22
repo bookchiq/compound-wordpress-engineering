@@ -28,7 +28,7 @@ Before committing ANY changes:
 
 ```
 agents/
-├── review/     # Code review agents (17) — includes 6 WordPress-specific reviewers + AI Building Blocks reviewer
+├── review/     # Code review agents (18) — includes 6 WordPress-specific reviewers + AI Building Blocks reviewer + call chain verifier
 ├── research/   # Research and analysis agents (5)
 ├── design/     # Design and UI agents (3)
 └── workflow/   # Workflow automation agents (3)

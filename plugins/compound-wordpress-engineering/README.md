@@ -8,7 +8,7 @@ Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/c
 
 | Component | Count |
 |-----------|-------|
-| Agents | 28 |
+| Agents | 29 |
 | Commands | 22 |
 | Skills | 17 |
 | MCP Servers | 1 |
@@ -17,7 +17,7 @@ Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/c
 
 Agents are organized into categories for easier discovery.
 
-### Review (17)
+### Review (18)
 
 | Agent | Description |
 |-------|-------------|
@@ -36,7 +36,8 @@ Agents are organized into categories for easier discovery.
 | `data-integrity-guardian` | Database migrations and data integrity |
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
-| `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
+| `call-chain-verifier` | Trace UI actions through all layers, verify signatures at boundaries |
+| `pattern-recognition-specialist` | Analyze code for patterns, anti-patterns, and dead code |
 | `wp-ai-building-blocks-reviewer` | Review code using Abilities API, AI Client SDK, and MCP Adapter |
 
 ### Research (5)

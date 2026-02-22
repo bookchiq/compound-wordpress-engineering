@@ -5,6 +5,14 @@ All notable changes to the compound-wordpress-engineering plugin will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-02-22
+
+### Added
+- `call-chain-verifier` agent — Traces UI-initiated actions through all WordPress layers (UI, Transport, Hook/Action, Service, Data) and verifies function signatures at each boundary. Detects broken chains, dead ends, orphaned registrations, and mismatched argument counts.
+
+### Changed
+- `pattern-recognition-specialist` agent — Added dead code detection: unused functions, orphaned hook callbacks, unreachable code paths, unused template files, unused CSS/JS assets, and WordPress-specific dead code patterns (unused CPTs, taxonomies, options, meta keys, REST routes, shortcodes, widgets). Includes confidence levels for hook-related findings.
+
 ## [1.1.1] - 2026-02-22
 
 ### Added
