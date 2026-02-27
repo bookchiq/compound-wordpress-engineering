@@ -33,10 +33,10 @@
         <div class="nav-section">
           <h3>Reference</h3>
           <ul>
-            <li><a href="agents.html">Agents (29)</a></li>
+            <li><a href="agents.html">Agents (30)</a></li>
             <li><a href="commands.html">Commands (21)</a></li>
-            <li><a href="skills.html">Skills (17)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (1)</a></li>
+            <li><a href="skills.html">Skills (22)</a></li>
+            <li><a href="mcp-servers.html">MCP Servers (2)</a></li>
           </ul>
         </div>
         <div class="nav-section">
@@ -48,6 +48,7 @@
         <div class="nav-section">
           <h3>On This Page</h3>
           <ul>
+            <li><a href="#v1.5.0">v1.5.0</a></li>
             <li><a href="#v1.3.2">v1.3.2</a></li>
             <li><a href="#v1.3.1">v1.3.1</a></li>
             <li><a href="#v1.3.0">v1.3.0</a></li>
@@ -85,6 +86,124 @@
           <a href="https://keepachangelog.com/">Keep a Changelog</a> conventions.
           This is a WordPress fork of <a href="https://github.com/EveryInc/compound-engineering-plugin">EveryInc/compound-engineering-plugin</a>.
         </p>
+
+        <!-- Version 1.5.0 -->
+        <section id="v1.5.0" class="version-section">
+          <div class="version-header">
+            <h2>v1.5.0</h2>
+            <span class="version-date">2026-02-27</span>
+            <span class="version-badge minor">Testing &amp; Static Analysis</span>
+          </div>
+
+          <div class="changelog-category added">
+            <h3><i class="fa-solid fa-plus"></i> Added</h3>
+            <ul>
+              <li>
+                <strong><code>wp-playground</code> skill</strong> - Start and manage WordPress Playground
+                instances for local testing. Includes startup/stop/status scripts, blueprint patterns
+                reference, and evaluation procedure for comparing Playground implementations.
+              </li>
+              <li>
+                <strong><code>wp-testing</code> skill</strong> - Scaffold and run WordPress test suites
+                (PHPUnit, wp-browser, Playwright). Includes scaffold and run scripts, plus 4 reference
+                docs: PHPUnit setup, test patterns, TDD workflow, and fixture patterns.
+              </li>
+              <li>
+                <strong><code>wp-phpcs</code> skill</strong> - Run PHP_CodeSniffer with WordPress Coding
+                Standards. Includes setup and run scripts, plus phpcs.xml.dist configuration templates.
+              </li>
+              <li>
+                <strong><code>wp-phpstan</code> skill</strong> - Run PHPStan static analysis with WordPress
+                extensions (<code>szepeviktor/phpstan-wordpress</code>). Includes setup and run scripts,
+                plus phpstan.neon configuration templates.
+              </li>
+              <li>
+                <strong><code>wp-eslint</code> skill</strong> - Run ESLint with
+                <code>@wordpress/eslint-plugin</code>. Includes run script and .eslintrc.json templates.
+              </li>
+              <li>
+                <strong><code>wp-test-reviewer</code> agent</strong> - Reviews test suites for isolation,
+                meaningful assertions, security path coverage, integration patterns, naming conventions,
+                and anti-patterns.
+              </li>
+              <li>
+                <strong>Playwright MCP server</strong> - Browser automation for end-to-end testing,
+                replaces agent-browser as the primary tool.
+              </li>
+            </ul>
+          </div>
+
+          <div class="changelog-category changed">
+            <h3><i class="fa-solid fa-arrows-rotate"></i> Changed</h3>
+            <ul>
+              <li>
+                <strong><code>wp-php-reviewer</code> agent</strong> - Added Step 0: runs PHPCS and PHPStan
+                (if available) before prompt-based analysis, incorporating tool findings into review.
+              </li>
+              <li>
+                <strong><code>wp-javascript-reviewer</code> agent</strong> - Added Step 0: runs ESLint
+                (if available) before prompt-based analysis, incorporating tool findings into review.
+              </li>
+              <li>
+                <strong><code>workflows:work</code> command</strong> - Added "Establish Testing Strategy"
+                step, red/green TDD checkpoints, test coverage row, and Playwright MCP screenshots.
+              </li>
+              <li>
+                <strong><code>workflows:review</code> command</strong> - Added Static Analysis Phase,
+                Test Coverage Check, and wp-test-reviewer as conditional agent.
+              </li>
+              <li>
+                <strong><code>test-browser</code> command</strong> - Rewritten to use Playwright MCP as
+                primary tool with agent-browser as fallback. Auto-detects server URL.
+              </li>
+              <li>
+                <strong><code>setup</code> skill</strong> - Added test environment detection, static
+                analysis tool detection, new configuration questions, and extended output format.
+              </li>
+            </ul>
+          </div>
+
+          <div class="changelog-category fixed">
+            <h3><i class="fa-solid fa-bug"></i> Fixed</h3>
+            <ul>
+              <li>
+                <strong>Shell script security</strong> - Added PORT validation, array-based command
+                construction, PROJECT_NAME sanitization, PID validation before kill, and null-terminated
+                xargs in all static analysis run scripts.
+              </li>
+              <li>
+                <strong>Duplicate static analysis</strong> - Review agents now skip tool execution when
+                results are already provided by <code>workflows:review</code>.
+              </li>
+              <li>
+                <strong>Playwright MCP version</strong> - Pinned to <code>@playwright/mcp@0.0.68</code>
+                (was <code>@latest</code>).
+              </li>
+              <li>
+                <strong><code>scaffold-tests.sh</code></strong> - <code>--type</code> parameter now
+                produces differentiated scaffolding for plugin/theme/block.
+              </li>
+            </ul>
+          </div>
+
+          <div class="version-summary">
+            <h4>Component Summary at v1.5.0</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Agents</td><td>30 (+1)</td></tr>
+                <tr><td>Commands</td><td>21</td></tr>
+                <tr><td>Skills</td><td>22 (+5)</td></tr>
+                <tr><td>MCP Servers</td><td>2 (+1)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         <!-- Version 1.3.2 -->
         <section id="v1.3.2" class="version-section">

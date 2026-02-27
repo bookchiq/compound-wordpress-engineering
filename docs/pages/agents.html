@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Agent Reference - Compounding WordPress Engineering</title>
-  <meta content="Complete reference for all 29 specialized AI agents in the Compounding WordPress Engineering plugin." name="description" />
+  <meta content="Complete reference for all 30 specialized AI agents in the Compounding WordPress Engineering plugin." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -33,10 +33,10 @@
         <div class="nav-section">
           <h3>Reference</h3>
           <ul>
-            <li><a href="agents.html" class="active">Agents (29)</a></li>
+            <li><a href="agents.html" class="active">Agents (30)</a></li>
             <li><a href="commands.html">Commands (21)</a></li>
-            <li><a href="skills.html">Skills (17)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (1)</a></li>
+            <li><a href="skills.html">Skills (22)</a></li>
+            <li><a href="mcp-servers.html">MCP Servers (2)</a></li>
           </ul>
         </div>
         <div class="nav-section">
@@ -48,7 +48,7 @@
         <div class="nav-section">
           <h3>On This Page</h3>
           <ul>
-            <li><a href="#review-agents">Review (18)</a></li>
+            <li><a href="#review-agents">Review (19)</a></li>
             <li><a href="#research-agents">Research (5)</a></li>
             <li><a href="#design-agents">Design (3)</a></li>
             <li><a href="#workflow-agents">Workflow (3)</a></li>
@@ -74,7 +74,7 @@
       <article class="docs-article">
         <h1><i class="fa-solid fa-users-gear color-accent"></i> Agent Reference</h1>
         <p class="lead">
-          Think of agents as your expert teammates who never sleep. You've got 29 specialists here--each one obsessed with a single domain. Seven of them are WordPress-specific reviewers covering PHP standards, Gutenberg blocks, hooks, themes, JavaScript, frontend races, and AI Building Blocks. Call them individually when you need focused expertise, or orchestrate them together for multi-angle analysis.
+          Think of agents as your expert teammates who never sleep. You've got 30 specialists here--each one obsessed with a single domain. Seven of them are WordPress-specific reviewers covering PHP standards, Gutenberg blocks, hooks, themes, JavaScript, frontend races, and test quality. Plus an AI Building Blocks reviewer for the Abilities API. Call them individually when you need focused expertise, or orchestrate them together for multi-angle analysis.
         </p>
 
         <div class="usage-box">
@@ -95,7 +95,7 @@ claude agent wp-gutenberg-reviewer "Review the pricing table block"</code></pre>
 
         <!-- Review Agents -->
         <section id="review-agents">
-          <h2><i class="fa-solid fa-code-pull-request"></i> Review Agents (18)</h2>
+          <h2><i class="fa-solid fa-code-pull-request"></i> Review Agents (19)</h2>
           <p>Your code review dream team. Seven WordPress-specific reviewers plus eleven framework-agnostic specialists that catch what humans miss--security holes, performance cliffs, architectural drift, hook priority conflicts, and missing block deprecations. They're picky. They disagree with each other. That's the point.</p>
 
           <div class="agent-detail" id="wp-php-reviewer">
@@ -242,6 +242,28 @@ claude agent wp-gutenberg-reviewer "Review the pricing table block"</code></pre>
             </ul>
             <div class="card-code-block">
               <pre><code>claude agent wp-ai-building-blocks-reviewer "Review the AI excerpt generation"</code></pre>
+            </div>
+          </div>
+
+          <div class="agent-detail" id="wp-test-reviewer">
+            <div class="agent-detail-header">
+              <h3>wp-test-reviewer</h3>
+              <span class="agent-badge">WordPress</span>
+            </div>
+            <p class="agent-detail-description">
+              Reviews test suites for WordPress plugins and themes. Checks test isolation, meaningful assertions, security path coverage (nonce-fail tests, capability checks, malicious input), integration patterns with real WordPress (WP_UnitTestCase), naming conventions, and common anti-patterns like mocking core when integration tests are available.
+            </p>
+            <h4>Key Focus Areas</h4>
+            <ul>
+              <li>Test isolation -- no shared state or execution order dependency</li>
+              <li>Meaningful assertions -- no empty tests, prefer assertSame over assertEquals</li>
+              <li>Security path coverage -- nonce failures, capability denials, malicious input</li>
+              <li>Integration coverage -- hooks, DB operations, REST endpoints with real WordPress</li>
+              <li>Naming conventions -- test methods describe scenarios</li>
+              <li>Anti-patterns -- mocking core unnecessarily, testing implementation details</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>claude agent wp-test-reviewer "Review the tests for the REST API endpoint"</code></pre>
             </div>
           </div>
 

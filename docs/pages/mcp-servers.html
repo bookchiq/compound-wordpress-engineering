@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>MCP Servers Reference - Compounding WordPress Engineering</title>
-  <meta content="Complete reference for the MCP server in the Compounding WordPress Engineering plugin." name="description" />
+  <meta content="Complete reference for the 2 MCP servers in the Compounding WordPress Engineering plugin." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -33,10 +33,10 @@
         <div class="nav-section">
           <h3>Reference</h3>
           <ul>
-            <li><a href="agents.html">Agents (29)</a></li>
+            <li><a href="agents.html">Agents (30)</a></li>
             <li><a href="commands.html">Commands (21)</a></li>
-            <li><a href="skills.html">Skills (17)</a></li>
-            <li><a href="mcp-servers.html" class="active">MCP Servers (1)</a></li>
+            <li><a href="skills.html">Skills (22)</a></li>
+            <li><a href="mcp-servers.html" class="active">MCP Servers (2)</a></li>
           </ul>
         </div>
         <div class="nav-section">
@@ -49,6 +49,7 @@
           <h3>On This Page</h3>
           <ul>
             <li><a href="#context7">Context7</a></li>
+            <li><a href="#playwright">Playwright</a></li>
             <li><a href="#manual-config">Manual Configuration</a></li>
           </ul>
         </div>
@@ -72,7 +73,7 @@
       <article class="docs-article">
         <h1><i class="fa-solid fa-server color-accent"></i> MCP Servers Reference</h1>
         <p class="lead">
-          Think of MCP servers as power tools that plug into Claude Code. The plugin bundles Context7, which gives Claude instant access to up-to-date documentation for WordPress, PHP, JavaScript, and 100+ other frameworks. Need to know how the Interactivity API handles state? Context7 fetches the answer in real-time instead of relying on outdated training data.
+          MCP servers are power tools that plug into Claude Code. The plugin bundles two: Context7 for real-time framework documentation, and Playwright for browser automation and end-to-end testing. Together they let Claude look up how an API works and then test that it does.
         </p>
 
         <div class="callout callout-warning">
@@ -183,6 +184,82 @@
           </div>
         </section>
 
+        <!-- Playwright -->
+        <section id="playwright">
+          <h2><i class="fa-solid fa-browser"></i> Playwright</h2>
+          <p>
+            Browser automation for end-to-end testing. Playwright MCP gives Claude the ability to navigate pages, click elements, fill forms, take screenshots, and verify what users actually see. It's the primary tool for the <code>/test-browser</code> command and integrates with WP Playground for testing WordPress admin interfaces.
+          </p>
+
+          <h3>Tools Provided</h3>
+          <table class="docs-table">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>browser_navigate</code></td>
+                <td>Navigate to a URL</td>
+              </tr>
+              <tr>
+                <td><code>browser_snapshot</code></td>
+                <td>Capture the accessibility tree of the current page</td>
+              </tr>
+              <tr>
+                <td><code>browser_click</code></td>
+                <td>Click an element on the page</td>
+              </tr>
+              <tr>
+                <td><code>browser_type</code></td>
+                <td>Type text into an input field</td>
+              </tr>
+              <tr>
+                <td><code>browser_screenshot</code></td>
+                <td>Take a screenshot of the current page</td>
+              </tr>
+              <tr>
+                <td><code>browser_wait</code></td>
+                <td>Wait for a specified time or condition</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Example Usage</h3>
+          <div class="card-code-block">
+            <pre><code># Navigate to WordPress admin
+mcp__playwright__browser_navigate(url="http://localhost:9400/wp-admin/")
+
+# Take a screenshot of the dashboard
+mcp__playwright__browser_screenshot()
+
+# Click an element
+mcp__playwright__browser_click(element="Posts")</code></pre>
+          </div>
+
+          <h3>Configuration</h3>
+          <div class="card-code-block">
+            <pre><code>{
+  "playwright": {
+    "command": "npx",
+    "args": ["@playwright/mcp@0.0.68"]
+  }
+}</code></pre>
+          </div>
+
+          <div class="callout callout-info">
+            <div class="callout-icon"><i class="fa-solid fa-circle-info"></i></div>
+            <div class="callout-content">
+              <h4>Fallback: agent-browser</h4>
+              <p>
+                If Playwright MCP isn't available (e.g., Node.js not installed), the <code>/test-browser</code> command falls back to the <code>agent-browser</code> skill, which uses Vercel's agent-browser CLI for browser automation.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <!-- Manual Configuration -->
         <section id="manual-config">
           <h2><i class="fa-solid fa-gear"></i> Manual Configuration</h2>
@@ -198,19 +275,27 @@
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@0.0.68"]
     }
   }
 }</code></pre>
           </div>
 
           <h3>Global Configuration</h3>
-          <p>Or enable everywhere--every project on your machine gets this server. Add to <code>~/.claude/settings.json</code>:</p>
+          <p>Or enable everywhere--every project on your machine gets these servers. Add to <code>~/.claude/settings.json</code>:</p>
           <div class="card-code-block">
             <pre><code>{
   "mcpServers": {
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@0.0.68"]
     }
   }
 }</code></pre>
@@ -228,6 +313,10 @@
               <tr>
                 <td>Context7</td>
                 <td>Internet connection (HTTP endpoint, no local install needed)</td>
+              </tr>
+              <tr>
+                <td>Playwright</td>
+                <td>Node.js 18+ and npx (installs <code>@playwright/mcp</code> automatically)</td>
               </tr>
             </tbody>
           </table>

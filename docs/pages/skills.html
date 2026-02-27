@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <title>Skill Reference - Compounding WordPress Engineering</title>
-  <meta content="Complete reference for all 17 intelligent skills in the Compounding WordPress Engineering plugin." name="description" />
+  <meta content="Complete reference for all 22 intelligent skills in the Compounding WordPress Engineering plugin." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -33,10 +33,10 @@
         <div class="nav-section">
           <h3>Reference</h3>
           <ul>
-            <li><a href="agents.html">Agents (29)</a></li>
+            <li><a href="agents.html">Agents (30)</a></li>
             <li><a href="commands.html">Commands (21)</a></li>
-            <li><a href="skills.html" class="active">Skills (17)</a></li>
-            <li><a href="mcp-servers.html">MCP Servers (1)</a></li>
+            <li><a href="skills.html" class="active">Skills (22)</a></li>
+            <li><a href="mcp-servers.html">MCP Servers (2)</a></li>
           </ul>
         </div>
         <div class="nav-section">
@@ -49,6 +49,7 @@
           <h3>On This Page</h3>
           <ul>
             <li><a href="#wordpress-development">WordPress Development (3)</a></li>
+            <li><a href="#testing-quality">Testing & Quality (5)</a></li>
             <li><a href="#development-tools">Development Tools (5)</a></li>
             <li><a href="#workflow-productivity">Workflow & Productivity (8)</a></li>
             <li><a href="#image-generation">Image Generation (1)</a></li>
@@ -163,6 +164,112 @@ skill: create-agent-skills</code></pre>
             </ul>
             <div class="card-code-block">
               <pre><code>skill: setup</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testing & Quality -->
+        <section id="testing-quality">
+          <h2><i class="fa-solid fa-flask-vial"></i> Testing & Quality (5)</h2>
+          <p>Testing infrastructure, static analysis, and WordPress Playground for disposable test environments. These skills make the test-and-review loop self-contained.</p>
+
+          <div class="skill-detail" id="wp-testing">
+            <div class="skill-detail-header">
+              <h3>wp-testing</h3>
+              <span class="skill-badge">Testing</span>
+            </div>
+            <p class="skill-detail-description">
+              Scaffold and run WordPress test suites--PHPUnit for unit tests, WP_UnitTestCase for integration tests, and Playwright for browser testing. Includes scripts for scaffolding test infrastructure and running suites, plus reference docs for PHPUnit setup, test patterns, TDD workflow, and fixture patterns.
+            </p>
+            <h4>Key Features</h4>
+            <ul>
+              <li><strong>Scaffolding</strong> - Auto-generates phpunit.xml.dist, bootstrap.php, and sample tests for plugins, themes, or blocks</li>
+              <li><strong>Test Pyramid</strong> - Unit, integration, REST API, WP-CLI, and browser test guidance</li>
+              <li><strong>TDD Workflow</strong> - Red-green-refactor adapted for WordPress development</li>
+              <li><strong>Fixture Patterns</strong> - Factory methods, setUp/tearDown, JSON fixtures</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>skill: wp-testing</code></pre>
+            </div>
+          </div>
+
+          <div class="skill-detail" id="wp-playground">
+            <div class="skill-detail-header">
+              <h3>wp-playground</h3>
+              <span class="skill-badge">Testing</span>
+            </div>
+            <p class="skill-detail-description">
+              Start disposable WordPress instances for testing using <code>@wp-playground/cli</code>. Auto-detects plugin/theme/block projects and mounts them correctly. Includes scripts for start/stop/status, blueprint patterns for configuring test environments, and an evaluation procedure for comparing Playground implementations.
+            </p>
+            <h4>Key Features</h4>
+            <ul>
+              <li><strong>Auto-detection</strong> - Identifies plugin, theme, or block projects and mounts accordingly</li>
+              <li><strong>Blueprint support</strong> - JSON blueprints for reproducible test environments</li>
+              <li><strong>Quick access</strong> - Default credentials admin/password at localhost:9400</li>
+              <li><strong>Integration</strong> - Works with PHPUnit, wp-browser, and Playwright for automated testing</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>skill: wp-playground</code></pre>
+            </div>
+          </div>
+
+          <div class="skill-detail" id="wp-phpcs">
+            <div class="skill-detail-header">
+              <h3>wp-phpcs</h3>
+              <span class="skill-badge">Linting</span>
+            </div>
+            <p class="skill-detail-description">
+              Run PHP_CodeSniffer with WordPress Coding Standards on changed files. Includes setup and run scripts, plus phpcs.xml.dist configuration templates for plugins and themes. Integrates with the wp-php-reviewer agent for automated review workflows.
+            </p>
+            <h4>Key Features</h4>
+            <ul>
+              <li><strong>Setup automation</strong> - Installs PHPCS + WPCS via Composer</li>
+              <li><strong>Changed-files mode</strong> - Runs only on files changed since the base branch</li>
+              <li><strong>Auto-fix</strong> - phpcbf integration for automatic style corrections</li>
+              <li><strong>JSON output</strong> - Structured results for agent consumption</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>skill: wp-phpcs</code></pre>
+            </div>
+          </div>
+
+          <div class="skill-detail" id="wp-phpstan">
+            <div class="skill-detail-header">
+              <h3>wp-phpstan</h3>
+              <span class="skill-badge">Analysis</span>
+            </div>
+            <p class="skill-detail-description">
+              Run PHPStan static analysis with the <code>szepeviktor/phpstan-wordpress</code> extension for WordPress-aware type checking. Catches undefined methods, incorrect function signatures, and type errors that PHPCS misses. Includes setup scripts, run scripts, and phpstan.neon configuration templates.
+            </p>
+            <h4>Key Features</h4>
+            <ul>
+              <li><strong>WordPress-aware</strong> - Understands WordPress function signatures and global variables</li>
+              <li><strong>Configurable levels</strong> - Analysis levels 0-9 for gradual adoption</li>
+              <li><strong>Baseline management</strong> - Ignore existing errors, catch new ones</li>
+              <li><strong>Changed-files mode</strong> - Analyze only files modified since the base branch</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>skill: wp-phpstan</code></pre>
+            </div>
+          </div>
+
+          <div class="skill-detail" id="wp-eslint">
+            <div class="skill-detail-header">
+              <h3>wp-eslint</h3>
+              <span class="skill-badge">Linting</span>
+            </div>
+            <p class="skill-detail-description">
+              Run ESLint with <code>@wordpress/eslint-plugin</code> for JavaScript and TypeScript code quality. Covers block editor patterns, Interactivity API stores, and @wordpress/* package usage. Includes run scripts and .eslintrc.json configuration templates.
+            </p>
+            <h4>Key Features</h4>
+            <ul>
+              <li><strong>WordPress rules</strong> - @wordpress/eslint-plugin for WordPress JS conventions</li>
+              <li><strong>Auto-fix</strong> - ESLint --fix for automatic corrections</li>
+              <li><strong>Changed-files mode</strong> - Lint only JS/TS files changed since the base branch</li>
+              <li><strong>JSON output</strong> - Structured results for agent consumption</li>
+            </ul>
+            <div class="card-code-block">
+              <pre><code>skill: wp-eslint</code></pre>
             </div>
           </div>
         </section>
