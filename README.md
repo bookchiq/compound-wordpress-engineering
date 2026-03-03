@@ -8,7 +8,7 @@ Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/c
 
 ```bash
 /plugin marketplace add https://github.com/bookchiq/compound-wordpress-engineering
-/plugin install compound-wordpress-engineering
+/plugin install compound-wordpress-engineering@compound-wordpress-marketplace
 ```
 
 ## OpenCode, Codex, Droid, Cursor, Pi & Gemini (experimental) Install
