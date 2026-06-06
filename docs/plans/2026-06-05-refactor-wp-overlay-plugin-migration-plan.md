@@ -1,7 +1,7 @@
 ---
 title: "Convert the WordPress fork into a clean overlay plugin"
 type: refactor
-status: active
+status: completed
 date: 2026-06-05
 origin: docs/plans/wp-overlay-migration.md
 reviewed: 2026-06-05 (architecture, simplicity, safety)
