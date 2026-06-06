@@ -1,48 +1,63 @@
 # Agent Instructions
 
-This repository contains a Bun/TypeScript CLI that converts Claude Code plugins into other agent platform formats.
+This repository is a Claude Code plugin **marketplace** that distributes the
+`compound-wordpress-engineering` plugin — a **WordPress overlay** for Every's
+[`compound-engineering`](https://github.com/EveryInc/compound-engineering-plugin) plugin.
 
-## Working Agreement
+## The overlay model (read this first)
 
-- **Branching:** Create a feature branch for any non-trivial change. If already on the correct branch for the task, keep using it; do not create additional branches or worktrees unless explicitly requested.
-- **Safety:** Do not delete or overwrite user data. Avoid destructive commands.
-- **Testing:** Run `bun test` after changes that affect parsing, conversion, or output.
-- **Output Paths:** Keep OpenCode output at `opencode.json` and `.opencode/{agents,skills,plugins}`.
-- **ASCII-first:** Use ASCII unless the file already contains Unicode.
+This is **not** a fork of upstream. It is a thin layer that adds only genuinely
+WordPress-specific work and relies on upstream `compound-engineering` (installed separately,
+kept current via `claude plugin update`) for the generic workflow and reviewers.
 
-## Adding a New Target Provider (e.g., Codex)
+- **Add WordPress on top; never re-vendor upstream's generic agents/skills/commands.** If
+  upstream already ships a generic version of something (security, performance, architecture,
+  simplicity, data integrity, research, design, workflow, etc.), do **not** copy it here —
+  it lives upstream under a `ce-*` name.
+- **Keep here only what upstream lacks or what is WordPress-specific.** The `wp-*` reviewers
+  and skills, plus a small number of WordPress-native reviewers upstream has no equivalent for
+  (`wp-call-chain-reviewer`, `wp-schema-drift-reviewer`, `wp-data-migration-reviewer`).
+- **No name collisions:** upstream uses `ce-*`; this overlay uses `wp-*`. The two install side
+  by side without renaming.
 
-Use this checklist when introducing a new target provider:
+## Repository structure
 
-1. **Define the target entry**
-   - Add a new handler in `src/targets/index.ts` with `implemented: false` until complete.
-   - Use a dedicated writer module (e.g., `src/targets/codex.ts`).
+```
+.claude-plugin/marketplace.json          # Marketplace catalog (lists this plugin)
+plugins/compound-wordpress-engineering/
+  .claude-plugin/plugin.json             # Plugin metadata + mcpServers (context7, playwright)
+  agents/review/                         # 11 WordPress review agents (all wp-*)
+  skills/                                # 7 WordPress skills (all wp-*)
+  README.md                              # Full component reference
+  CHANGELOG.md                           # Keep a Changelog format
+docs/                                    # Project notes (fork-audit, solutions, plans) — not a published site
+plans/                                   # Working notes
+```
 
-2. **Define types and mapping**
-   - Add provider-specific types under `src/types/`.
-   - Implement conversion logic in `src/converters/` (from Claude → provider).
-   - Keep mappings explicit: tools, permissions, hooks/events, model naming.
+## Working agreement
 
-3. **Wire the CLI**
-   - Ensure `convert` and `install` support `--to <provider>` and `--also`.
-   - Keep behavior consistent with OpenCode (write to a clean provider root).
+- **Branching:** create a feature branch for any non-trivial change; do not commit directly
+  to `main`. Do not create extra worktrees unless asked.
+- **Safety:** do not delete or overwrite user data; avoid destructive commands. Prefer the
+  Write/Edit tools over shell redirects.
+- **WordPress code:** follow WordPress Coding Standards (PHP, JS, CSS).
 
-4. **Tests (required)**
-   - Extend fixtures in `tests/fixtures/sample-plugin`.
-   - Add spec coverage for mappings in `tests/converter.test.ts`.
-   - Add a writer test for the new provider output tree.
-   - Add a CLI test for the provider (similar to `tests/cli.test.ts`).
+## Keeping metadata in sync
 
-5. **Docs**
-   - Update README with the new `--to` option and output locations.
+Whenever review agents or skills are added/removed, update the counts in **all three** places
+so they match the filesystem, then bump the version and changelog:
 
-## When to Add a Provider
+1. `plugins/compound-wordpress-engineering/.claude-plugin/plugin.json` → `description` + `version`
+2. `.claude-plugin/marketplace.json` → plugin `description` + `version`
+3. `plugins/compound-wordpress-engineering/README.md` → component table
+4. `plugins/compound-wordpress-engineering/CHANGELOG.md` → new entry (Keep a Changelog)
 
-Add a new provider when at least one of these is true:
+Count commands:
 
-- A real user/workflow needs it now.
-- The target format is stable and documented.
-- There’s a clear mapping for tools/permissions/hooks.
-- You can write fixtures + tests that validate the mapping.
+```bash
+ls -d plugins/compound-wordpress-engineering/skills/*/ | wc -l            # skills
+ls plugins/compound-wordpress-engineering/agents/review/*.md | wc -l      # review agents
+```
 
-Avoid adding a provider if the target spec is unstable or undocumented.
+**Version bumping (semver):** MAJOR for breaking restructures, MINOR for new agents/skills,
+PATCH for fixes/docs. Validate JSON before committing: `jq . <file>`.

@@ -5,6 +5,22 @@ All notable changes to the compound-wordpress-engineering plugin will be documen
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-06-06
+
+### Changed (BREAKING)
+- **Restructured from a fork into a slim WordPress overlay.** The plugin no longer vendors upstream's generic engineering workflow. Install Every's [`compound-engineering`](https://github.com/EveryInc/compound-engineering-plugin) plugin first (kept current via `claude plugin update`); this overlay layers WordPress expertise on top under a non-colliding `wp-*` namespace.
+- Renamed three WordPress-native review agents to the `wp-*` prefix for a clear additive identity: `call-chain-verifier` → `wp-call-chain-reviewer`, `schema-drift-detector` → `wp-schema-drift-reviewer`, `data-migration-expert` → `wp-data-migration-reviewer`.
+- Folded the WordPress-specific performance checks from the removed `performance-oracle` into `wp-php-reviewer`, and the WordPress dead-hook detection from `pattern-recognition-specialist` into `wp-hooks-reviewer`.
+
+### Removed
+- All forked-from-upstream generic agents now maintained upstream under `ce-*`: review agents (`security-sentinel`, `performance-oracle`, `pattern-recognition-specialist`, `data-integrity-guardian`, `agent-native-reviewer`, `architecture-strategist`, `code-simplicity-reviewer`, `deployment-verification-agent`), and the entire `research/`, `design/`, and `workflow/` agent directories.
+- All commands (16 utility + 5 `workflows/`) — these come from upstream `ce-*` now.
+- 15 generic skills (agent-browser, agent-native-architecture, brainstorming, compound-docs, create-agent-skills, document-review, file-todos, frontend-design, gemini-imagegen, git-worktree, orchestrating-swarms, rclone, resolve-pr-parallel, setup, skill-creator).
+- The multi-target TypeScript/Bun CLI converter (`src/`, `tests/`, `package.json`, npm package `@every-env/compound-plugin`), the `coding-tutor` plugin, the GitHub Pages docs site, and CI/publish/deploy workflows.
+
+### Result
+- 11 WordPress review agents, 7 WordPress skills, 0 commands, 2 MCP servers (`context7`, `playwright` — preserved).
+
 ## [1.5.1] - 2026-03-05
 
 ### Fixed

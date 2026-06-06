@@ -1,167 +1,52 @@
 # Compound WordPress Engineering Plugin
 
-AI-powered WordPress development tools that get smarter with every use. Make each unit of engineering work easier than the last.
+A **WordPress overlay** for Every's [`compound-engineering`](https://github.com/EveryInc/compound-engineering-plugin) plugin. It layers WordPress expertise *on top of* upstream's generic engineering workflow rather than replacing or forking it.
 
-Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin). Preserves the four-stage compounding loop (Plan, Work, Review, Compound) while replacing framework-specific components with WordPress equivalents.
+- **Upstream (`ce-*`) stays untouched** and current via `claude plugin update` — it provides the four-stage compounding loop (Plan, Work, Review, Compound) and all the generic reviewers.
+- **This overlay adds only genuinely WordPress-specific work**: WP review agents and WP tooling skills. It no longer vendors upstream's generic agents, commands, or skills — so it can't drift behind upstream the way the old fork did.
+
+> **Install upstream first.** This overlay is designed to run alongside `compound-engineering`, not instead of it. See [Installation](#installation).
 
 ## Components
 
 | Component | Count |
 |-----------|-------|
-| Agents | 30 |
-| Commands | 21 |
-| Skills | 22 |
+| Review agents | 11 |
+| Skills | 7 |
+| Commands | 0 (use upstream `ce-*`) |
 | MCP Servers | 2 |
 
-## Agents
+## Review Agents (11)
 
-Agents are organized into categories for easier discovery.
-
-### Review (19)
+All review agents are WordPress-specific. The generic reviewers (security, performance, architecture, simplicity, etc.) come from upstream `compound-engineering` under `ce-*` names.
 
 | Agent | Description |
 |-------|-------------|
-| `wp-php-reviewer` | WordPress PHP coding standards, security patterns, and WPCS compliance. Runs PHPCS + PHPStan if available. |
-| `wp-javascript-reviewer` | WordPress JS, block editor, Interactivity API, @wordpress/* packages. Runs ESLint if available. |
-| `wp-hooks-reviewer` | WordPress hook system — timing, priorities, removal, custom hooks |
+| `wp-php-reviewer` | WordPress PHP coding standards, security (nonces, capabilities, sanitization, escaping, `$wpdb->prepare`), WP-specific performance, and WPCS compliance. Runs PHPCS + PHPStan if available. |
+| `wp-javascript-reviewer` | WordPress JS, block editor, Interactivity API, `@wordpress/*` packages. Runs ESLint if available. |
+| `wp-hooks-reviewer` | WordPress hook system — timing, priorities, removal, custom hooks, orphaned/dead-hook detection |
 | `wp-gutenberg-reviewer` | Block editor — deprecations, block.json, SSR, InnerBlocks |
 | `wp-theme-reviewer` | Theme architecture — theme.json, template hierarchy, FSE patterns |
 | `wp-frontend-races-reviewer` | Race conditions in Interactivity API, block editor, AJAX/REST |
 | `wp-test-reviewer` | Test suite quality — isolation, assertions, security paths, coverage |
-| `security-sentinel` | OWASP top 10 + WordPress nonces, capabilities, sanitization, escaping |
-| `performance-oracle` | Performance + WordPress WP_Query, caching, hook placement, asset loading |
-| `schema-drift-detector` | Detect unrelated dbDelta/schema changes, verify version tracking |
-| `agent-native-reviewer` | Verify features are agent-native (action + context parity) |
-| `architecture-strategist` | Analyze architectural decisions and compliance |
-| `code-simplicity-reviewer` | Final pass for simplicity and minimalism |
-| `data-integrity-guardian` | Database migrations and data integrity |
-| `data-migration-expert` | Validate ID mappings match production, check for swapped values |
-| `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
-| `call-chain-verifier` | Trace UI actions through all layers, verify signatures at boundaries |
-| `pattern-recognition-specialist` | Analyze code for patterns, anti-patterns, and dead code |
-| `wp-ai-building-blocks-reviewer` | Review code using Abilities API, AI Client SDK, and MCP Adapter |
+| `wp-ai-building-blocks-reviewer` | Review code using the Abilities API, AI Client SDK, and MCP Adapter |
+| `wp-call-chain-reviewer` | Trace UI actions through all WordPress layers (AJAX, REST, hooks), verify signatures at each boundary |
+| `wp-schema-drift-reviewer` | Detect unrelated `dbDelta`/schema changes in WordPress PRs, verify version tracking and `$wpdb->prefix` usage |
+| `wp-data-migration-reviewer` | Validate WordPress data migrations/backfills — ID mappings, WP-CLI idempotency, orphaned associations |
 
-### Research (5)
-
-| Agent | Description |
-|-------|-------------|
-| `best-practices-researcher` | Gather external best practices and examples |
-| `framework-docs-researcher` | Research framework documentation and best practices |
-| `git-history-analyzer` | Analyze git history and code evolution |
-| `learnings-researcher` | Search institutional learnings for relevant past solutions |
-| `repo-research-analyst` | Research repository structure and conventions |
-
-### Design (3)
-
-| Agent | Description |
-|-------|-------------|
-| `design-implementation-reviewer` | Verify UI implementations match Figma designs |
-| `design-iterator` | Iteratively refine UI through systematic design iterations |
-| `figma-design-sync` | Synchronize web implementations with Figma designs |
-
-### Workflow (3)
-
-| Agent | Description |
-|-------|-------------|
-| `bug-reproduction-validator` | Systematically reproduce and validate bug reports |
-| `pr-comment-resolver` | Address PR comments and implement fixes |
-| `spec-flow-analyzer` | Analyze user flows and identify gaps in specifications |
-
-## Commands
-
-### Workflow Commands
-
-| Command | Description |
-|---------|-------------|
-| `/workflows:brainstorm` | Explore requirements and approaches before planning |
-| `/workflows:plan` | Create implementation plans |
-| `/workflows:review` | Run comprehensive code reviews |
-| `/workflows:work` | Execute work items systematically |
-| `/workflows:compound` | Document solved problems to compound team knowledge |
-
-### Utility Commands
-
-| Command | Description |
-|---------|-------------|
-| `/lfg` | Full autonomous engineering workflow |
-| `/slfg` | Full autonomous workflow with swarm mode |
-| `/deepen-plan` | Enhance plans with parallel research |
-| `/changelog` | Create changelogs for recent merges |
-| `/create-agent-skill` | Create or edit Claude Code skills |
-| `/generate_command` | Generate new slash commands |
-| `/heal-skill` | Fix skill documentation issues |
-| `/report-bug` | Report a bug in the plugin |
-| `/reproduce-bug` | Reproduce bugs using logs and console |
-| `/resolve_parallel` | Resolve TODO comments in parallel |
-| `/resolve_todo_parallel` | Resolve todos in parallel |
-| `/triage` | Triage and prioritize issues |
-| `/test-browser` | Run browser tests on PR-affected pages |
-| `/feature-video` | Record video walkthroughs |
-| `/agent-native-audit` | Run agent-native architecture review |
-| `/deploy-docs` | Validate docs for GitHub Pages |
-
-## Skills
-
-### WordPress Development
+## Skills (7)
 
 | Skill | Description |
 |-------|-------------|
-| `wp-development-patterns` | WordPress patterns, coding standards, and best practices |
-| `setup` | Configure review agents, test environment, and static analysis for your WordPress project |
+| `wp-development-patterns` | WordPress patterns, coding standards, and best practices (7 reference files) |
 | `wp-ai-building-blocks` | Abilities API, AI Client SDK, MCP Adapter, and AI Experiments reference |
-
-### Testing & Quality
-
-| Skill | Description |
-|-------|-------------|
 | `wp-testing` | Scaffold and run WordPress test suites (PHPUnit, wp-browser, Playwright) |
 | `wp-playground` | Start and manage WordPress Playground instances for local testing |
 | `wp-phpcs` | Run PHP_CodeSniffer with WordPress Coding Standards |
 | `wp-phpstan` | Run PHPStan static analysis with WordPress extensions |
-| `wp-eslint` | Run ESLint with @wordpress/eslint-plugin |
+| `wp-eslint` | Run ESLint with `@wordpress/eslint-plugin` |
 
-### Architecture & Tools
-
-| Skill | Description |
-|-------|-------------|
-| `agent-native-architecture` | Build AI agents using prompt-native architecture |
-| `frontend-design` | Create production-grade frontend interfaces |
-| `compound-docs` | Capture solved problems as documentation |
-| `create-agent-skills` | Expert guidance for creating skills |
-| `skill-creator` | Guide for creating effective skills |
-| `document-review` | Structured self-review for documents |
-
-### Workflow
-
-| Skill | Description |
-|-------|-------------|
-| `brainstorming` | Collaborative dialogue before planning |
-| `file-todos` | File-based todo tracking system |
-| `git-worktree` | Git worktrees for parallel development |
-| `resolve-pr-parallel` | Resolve PR comments in parallel |
-| `orchestrating-swarms` | Multi-agent swarm orchestration |
-
-### Integrations
-
-| Skill | Description |
-|-------|-------------|
-| `agent-browser` | Browser automation via agent-browser CLI (fallback for Playwright MCP) |
-| `gemini-imagegen` | Image generation via Gemini API |
-| `rclone` | Cloud storage file transfer |
-
-## WordPress-Specific Features
-
-- **7 WordPress review agents** for PHP, JS, hooks, Gutenberg, themes, race conditions, and test quality
-- **Static analysis integration** — wp-php-reviewer and wp-javascript-reviewer run PHPCS/PHPStan/ESLint before prompt-based analysis
-- **Testing infrastructure** — wp-testing skill scaffolds PHPUnit, wp-browser, and test patterns with TDD workflow
-- **WP Playground integration** — disposable WordPress instances for testing via `@wp-playground/cli`
-- **Enhanced security-sentinel** with nonces, capabilities, sanitization/escaping
-- **Enhanced performance-oracle** with WP_Query, caching, hook placement patterns
-- **WordPress setup skill** auto-detects plugin/theme/block projects, test environments, and static analysis tools
-- **AI Building Blocks support** — Abilities API, AI Client SDK, MCP Adapter review agent + skill with 4 reference files
-- **wp-development-patterns skill** with 7 reference files
-
-## MCP Servers
+## MCP Servers (2)
 
 | Server | Description |
 |--------|-------------|
@@ -171,20 +56,28 @@ Agents are organized into categories for easier discovery.
 ## Installation
 
 ```bash
-# Step 1: Add the marketplace
-/plugin marketplace add https://github.com/bookchiq/compound-wordpress-engineering
+# Step 1: Install upstream compound-engineering (the generic workflow)
+/plugin marketplace add EveryInc/compound-engineering-plugin
+/plugin install compound-engineering@compound-engineering-plugin
 
-# Step 2: Install the plugin
+# Step 2: Add this WordPress overlay
+/plugin marketplace add https://github.com/bookchiq/compound-wordpress-engineering
 /plugin install compound-wordpress-engineering@compound-wordpress-marketplace
 ```
 
+Keep upstream current with `/plugin update compound-engineering@compound-engineering-plugin`.
+
+### Wiring the overlay into your workflow
+
+Add a short WordPress section to your `~/.claude/CLAUDE.md` so Claude invokes the WP reviewers alongside the upstream `ce-*` workflow. The overlay's migration adds a marker-guarded block automatically; see the repository's migration plan for the exact text.
+
 ## Recommended Companion Skills
 
-This plugin now includes built-in testing (wp-testing, wp-playground), static analysis (wp-phpcs, wp-phpstan, wp-eslint), and browser testing (Playwright MCP). For deep WordPress API reference, install these community skills alongside it:
+This overlay includes built-in testing (wp-testing, wp-playground), static analysis (wp-phpcs, wp-phpstan, wp-eslint), and browser testing (Playwright MCP). For deep WordPress API reference, install these community skills alongside it:
 
 ### Official WordPress Collection
 
-The [`wordpress/agent-skills`](https://github.com/wordpress/agent-skills) collection covers areas this plugin intentionally doesn't duplicate:
+The [`wordpress/agent-skills`](https://github.com/wordpress/agent-skills) collection covers areas this overlay intentionally doesn't duplicate:
 
 ```bash
 # Interactivity API — directives, stores, server-side rendering
@@ -218,7 +111,7 @@ npx skills add https://github.com/bonny/wordpress-simple-history --skill wordpre
 
 ## Credits
 
-Forked from [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) by Kieran Klaassen.
+Builds on [EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) by Kieran Klaassen. This overlay is maintained independently and installs upstream as a dependency rather than forking it.
 
 ## License
 

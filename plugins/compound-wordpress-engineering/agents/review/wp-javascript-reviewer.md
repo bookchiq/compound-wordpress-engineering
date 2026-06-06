@@ -35,7 +35,7 @@ You are a senior WordPress JavaScript developer with deep expertise in the block
 
 ## 0. STATIC ANALYSIS FIRST PASS
 
-**Check for pre-existing results:** If a Static Analysis Summary was provided in the review context (from the `/workflows:review` command), skip running tools and use those results directly. Only run the tools below when invoked standalone (not through the review workflow).
+**Check for pre-existing results:** If a Static Analysis Summary was provided in the review context (from the review workflow, e.g. upstream `ce-review`), skip running tools and use those results directly. Only run the tools below when invoked standalone (not through the review workflow).
 
 Before manual review, run ESLint if available to catch mechanical issues automatically:
 

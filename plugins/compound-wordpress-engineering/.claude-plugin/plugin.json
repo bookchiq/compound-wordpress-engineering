@@ -1,7 +1,7 @@
 {
   "name": "compound-wordpress-engineering",
-  "version": "1.5.1",
-  "description": "AI-powered WordPress development tools. 30 agents, 21 commands, 22 skills, 2 MCP servers for code review, testing, static analysis, and workflow automation.",
+  "version": "2.0.0",
+  "description": "WordPress overlay for Every's compound-engineering plugin. Adds 11 WordPress review agents, 7 skills (PHPCS, PHPStan, ESLint, testing, Playground, AI building blocks, dev patterns), and 2 MCP servers. Install compound-engineering first; this layers WordPress expertise on top.",
   "author": {
     "name": "Sarah Lewis",
     "url": "https://github.com/bookchiq"

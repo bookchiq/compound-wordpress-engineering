@@ -137,7 +137,15 @@ When creating custom hooks:
 - Type safety: Verify the input type matches expectations before modifying
 - Early returns: Return unmodified value quickly when the filter doesn't apply
 
-## 8. REVIEW CHECKLIST
+## 8. ORPHANED & DEAD HOOKS
+
+Detect hook-related dead code, always stating a confidence level:
+
+- **Orphaned callbacks**: functions registered via `add_action`/`add_filter` for a custom hook that is never fired (no matching `do_action`/`apply_filters`), or whose registration was removed while the callback function remains.
+- **Dead custom hooks**: `do_action`/`apply_filters` for a hook that no callback ever listens to.
+- **Confidence levels**: public or core-pattern hooks (`save_post`, `init`, documented hooks) may be called by other plugins/themes — flag as **LOW** confidence dead code. Private prefixed hooks (`myplugin_before_save`) with no `do_action`/`apply_filters` anywhere in the codebase are **HIGH** confidence dead code.
+
+## 9. REVIEW CHECKLIST
 
 For every hook registration found:
 
