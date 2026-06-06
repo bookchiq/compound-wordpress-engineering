@@ -39,9 +39,9 @@ This overlay ships **no commands** — workflow commands (`/plan`, `/review`, `/
 
 ## Overlay discipline
 
-Add WordPress-specific work only. If upstream already ships a generic version of an agent or
-skill (under a `ce-*` name), do **not** re-vendor it here — keep this overlay limited to the
-`wp-*` reviewers and skills plus WordPress-native reviewers upstream has no equivalent for.
+See the "overlay model" section of the repo-root [`AGENTS.md`](../../AGENTS.md) — the canonical
+source. In short: add WordPress-specific work only; never re-vendor upstream's generic `ce-*`
+agents or skills.
 
 ## Skill Compliance Checklist
 
