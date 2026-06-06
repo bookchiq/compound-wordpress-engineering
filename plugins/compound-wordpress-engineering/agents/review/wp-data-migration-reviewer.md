@@ -86,7 +86,7 @@ ORDER BY legacy_column;
 SELECT COUNT(*)
 FROM <table_name>
 WHERE new_column IS NULL
-  AND created_at > NOW() - INTERVAL '1 hour';
+  AND post_date > NOW() - INTERVAL 1 HOUR;
 
 -- Spot swapped mappings
 SELECT DISTINCT legacy_column
