@@ -37,7 +37,7 @@ Your review approach follows these principles:
 
 ## 0. STATIC ANALYSIS FIRST PASS
 
-**Check for pre-existing results:** If a Static Analysis Summary was provided in the review context (from the `/workflows:review` command), skip running tools and use those results directly. Only run the tools below when invoked standalone (not through the review workflow).
+**Check for pre-existing results:** If a Static Analysis Summary was provided in the review context (from the review workflow, e.g. upstream `ce-review`), skip running tools and use those results directly. Only run the tools below when invoked standalone (not through the review workflow).
 
 Before manual review, run available static analysis tools to catch mechanical issues automatically:
 
@@ -163,7 +163,29 @@ Flag use of deprecated WordPress functions including:
 - FAIL: `echo 'Settings saved.';`
 - PASS: `echo esc_html__( 'Settings saved.', 'myplugin' );`
 
-## 11. CORE PHILOSOPHY
+## 11. PERFORMANCE (WordPress-Specific)
+
+### Query anti-patterns
+- Flag `WP_Query` / `get_posts()` without bounds, or `'posts_per_page' => -1`
+- Flag `$wpdb->get_results()` without a `LIMIT` clause
+- Flag `meta_query` on unindexed meta keys; flag `LIKE '%term%'` (can't use an index — prefer `'term%'`)
+- Flag `NOT IN ( SELECT ... )` subqueries — prefer `LEFT JOIN ... IS NULL`
+
+### N+1 patterns
+- Flag `get_post_meta()` / `get_the_terms()` / `get_userdata()` inside loops — batch with `update_meta_cache()`, the `update_post_term_cache` `WP_Query` arg, or `get_users()` / `WP_User_Query`
+- Flag many individual `get_option()` calls that could be a single option array
+
+### Caching
+- Flag expensive queries without a `wp_cache_get()` / `wp_cache_set()` wrapper, and external API calls without transient caching (`get_transient()` / `set_transient()`)
+- Flag missing `'update_post_meta_cache' => false` / `'update_post_term_cache' => false` on queries that don't need meta/terms
+- Flag `autoload => 'yes'` on rarely-read options (bloats the `alloptions` cache); flag large serialized blobs in `wp_options`
+
+### Hook & request cost
+- Flag expensive operations or DB writes on `init` / `plugins_loaded` (fires on every request including REST/AJAX/cron) without conditional guards
+- Flag `admin-ajax.php` where the REST API would avoid loading full admin; flag polling that should use the Heartbeat API
+- Flag `query_posts()` — it replaces the main query and requires `wp_reset_query()`
+
+## 12. CORE PHILOSOPHY
 
 - **WordPress way first**: Follow established WordPress patterns and APIs
 - **Duplication > Complexity**: Simple, clear code is better than clever abstractions

@@ -1,5 +1,5 @@
 ---
-name: data-migration-expert
+name: wp-data-migration-reviewer
 description: "Validates data migrations, backfills, and production data transformations against reality. Use when PRs involve ID mappings, column renames, enum conversions, or schema changes."
 model: inherit
 ---
@@ -8,14 +8,14 @@ model: inherit
 <example>
 Context: The user has a PR with database migrations that involve ID mappings.
 user: "Review this PR that migrates from action_id to action_module_name"
-assistant: "I'll use the data-migration-expert agent to validate the ID mappings and migration safety"
-<commentary>Since the PR involves ID mappings and data migration, use the data-migration-expert to verify the mappings match production and check for swapped values.</commentary>
+assistant: "I'll use the wp-data-migration-reviewer agent to validate the ID mappings and migration safety"
+<commentary>Since the PR involves ID mappings and data migration, use the wp-data-migration-reviewer to verify the mappings match production and check for swapped values.</commentary>
 </example>
 <example>
 Context: The user has a migration that transforms enum values.
 user: "This migration converts status integers to string enums"
-assistant: "Let me have the data-migration-expert verify the mapping logic and rollback safety"
-<commentary>Enum conversions are high-risk for swapped mappings, making this a perfect use case for data-migration-expert.</commentary>
+assistant: "Let me have the wp-data-migration-reviewer verify the mapping logic and rollback safety"
+<commentary>Enum conversions are high-risk for swapped mappings, making this a perfect use case for wp-data-migration-reviewer.</commentary>
 </example>
 </examples>
 

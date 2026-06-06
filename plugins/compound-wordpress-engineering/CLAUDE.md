@@ -21,35 +21,27 @@ Before committing ANY changes:
 - [ ] Version bumped in `.claude-plugin/plugin.json`
 - [ ] CHANGELOG.md updated with changes
 - [ ] README.md component counts verified
-- [ ] README.md tables accurate (agents, commands, skills)
+- [ ] README.md tables accurate (agents, skills)
 - [ ] plugin.json description matches current counts
 
 ### Directory Structure
 
 ```
 agents/
-├── review/     # Code review agents (19) — includes 7 WordPress-specific reviewers + AI Building Blocks reviewer + call chain verifier + test reviewer
-├── research/   # Research and analysis agents (5)
-├── design/     # Design and UI agents (3)
-└── workflow/   # Workflow automation agents (3)
-
-commands/
-├── workflows/  # Core workflow commands (workflows:plan, workflows:review, etc.)
-└── *.md        # Utility commands
+└── review/     # WordPress review agents (11) — all wp-* prefixed
 
 skills/
-└── *.md        # All skills at root level
+└── wp-*/       # WordPress skills (7), each a directory with SKILL.md
 ```
 
-## Command Naming Convention
+This overlay ships **no commands** — workflow commands (`/plan`, `/review`, `/work`,
+`/compound`, etc.) come from upstream `compound-engineering` under its `ce-*` namespace.
 
-**Workflow commands** use `workflows:` prefix to avoid collisions with built-in commands:
-- `/workflows:plan` - Create implementation plans
-- `/workflows:review` - Run comprehensive code reviews
-- `/workflows:work` - Execute work items systematically
-- `/workflows:compound` - Document solved problems
+## Overlay discipline
 
-**Why `workflows:`?** Claude Code has built-in `/plan` and `/review` commands. Using `name: workflows:plan` in frontmatter creates a unique `/workflows:plan` command with no collision.
+Add WordPress-specific work only. If upstream already ships a generic version of an agent or
+skill (under a `ce-*` name), do **not** re-vendor it here — keep this overlay limited to the
+`wp-*` reviewers and skills plus WordPress-native reviewers upstream has no equivalent for.
 
 ## Skill Compliance Checklist
 

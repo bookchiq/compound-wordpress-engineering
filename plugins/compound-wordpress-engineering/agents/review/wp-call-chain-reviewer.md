@@ -1,5 +1,5 @@
 ---
-name: call-chain-verifier
+name: wp-call-chain-reviewer
 description: "Traces UI-initiated actions through all WordPress layers and verifies signatures at each boundary. Use when reviewing end-to-end call chains, checking for broken connections between UI and database, or auditing traceability."
 model: inherit
 ---
@@ -8,20 +8,20 @@ model: inherit
 <example>
 Context: The user has an AJAX form that saves custom settings and wants to verify the full chain.
 user: "I just wired up an AJAX form to save plugin settings. Can you trace the full call chain?"
-assistant: "I'll use the call-chain-verifier agent to trace the chain from your form through AJAX transport, handler, service logic, and database write, verifying signatures at every boundary."
-<commentary>The user has a UI-to-database flow through AJAX — exactly what the call-chain-verifier traces. It will map the form submission, the wp_ajax_ handler, any service functions, and the final update_option/update_post_meta call.</commentary>
+assistant: "I'll use the wp-call-chain-reviewer agent to trace the chain from your form through AJAX transport, handler, service logic, and database write, verifying signatures at every boundary."
+<commentary>The user has a UI-to-database flow through AJAX — exactly what the wp-call-chain-reviewer traces. It will map the form submission, the wp_ajax_ handler, any service functions, and the final update_option/update_post_meta call.</commentary>
 </example>
 <example>
 Context: The user built a custom block with a REST API endpoint for saving block attributes.
 user: "My custom block saves data via a REST endpoint. Can you check that the whole chain is connected properly?"
-assistant: "Let me use the call-chain-verifier agent to trace from the block editor save through the REST route to the database, checking permission callbacks, argument schemas, and data layer calls."
+assistant: "Let me use the wp-call-chain-reviewer agent to trace from the block editor save through the REST route to the database, checking permission callbacks, argument schemas, and data layer calls."
 <commentary>Block editor → REST API → database is a common WordPress chain with multiple boundary points. The agent will verify register_rest_route schema, permission_callback, and the handler's database operations.</commentary>
 </example>
 <example>
 Context: The user added a bulk action handler in the admin list table.
 user: "I added a bulk action to the posts list table but it doesn't seem to do anything. Can you trace what's happening?"
-assistant: "I'll use the call-chain-verifier agent to trace from the bulk action registration through the handler hook, verifying the action name, nonce, capability check, and processing logic are all connected."
-<commentary>Bulk actions have a specific chain: admin form → handle_bulk_actions-{screen} hook → processing → redirect. A break at any point causes silent failure, making this ideal for call-chain-verifier.</commentary>
+assistant: "I'll use the wp-call-chain-reviewer agent to trace from the bulk action registration through the handler hook, verifying the action name, nonce, capability check, and processing logic are all connected."
+<commentary>Bulk actions have a specific chain: admin form → handle_bulk_actions-{screen} hook → processing → redirect. A break at any point causes silent failure, making this ideal for wp-call-chain-reviewer.</commentary>
 </example>
 </examples>
 

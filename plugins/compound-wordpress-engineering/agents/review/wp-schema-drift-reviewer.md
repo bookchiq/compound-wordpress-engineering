@@ -1,5 +1,5 @@
 ---
-name: schema-drift-detector
+name: wp-schema-drift-reviewer
 description: "Detects unrelated database schema changes in WordPress PRs by cross-referencing dbDelta calls, table creation, and version tracking. Use when reviewing PRs with database modifications."
 model: inherit
 ---
@@ -8,13 +8,13 @@ model: inherit
 <example>
 Context: The user has a PR with a plugin activation hook that creates tables.
 user: "Review this PR - it adds a new custom table for analytics data"
-assistant: "I'll use the schema-drift-detector agent to verify the database changes are properly scoped and version-tracked."
-<commentary>Since the PR includes database table creation, use schema-drift-detector to catch unrelated schema changes and verify proper version tracking.</commentary>
+assistant: "I'll use the wp-schema-drift-reviewer agent to verify the database changes are properly scoped and version-tracked."
+<commentary>Since the PR includes database table creation, use wp-schema-drift-reviewer to catch unrelated schema changes and verify proper version tracking.</commentary>
 </example>
 <example>
 Context: The PR modifies multiple database-related files.
 user: "This PR updates the plugin's database schema and adds new columns"
-assistant: "Let me use the schema-drift-detector to identify any schema changes that don't belong in this PR."
+assistant: "Let me use the wp-schema-drift-reviewer to identify any schema changes that don't belong in this PR."
 <commentary>Schema drift in WordPress happens when activation hooks run locally with different plugin versions.</commentary>
 </example>
 </examples>
@@ -192,8 +192,8 @@ Action Required:
 ## Integration with Other Reviewers
 
 This agent should be run BEFORE other database-related reviewers:
-- Run `schema-drift-detector` first to ensure clean schema changes
-- Then run `data-migration-expert` for migration logic review
-- Then run `data-integrity-guardian` for integrity checks
+- Run `wp-schema-drift-reviewer` first to ensure clean schema changes
+- Then run `wp-data-migration-reviewer` for migration logic review
+- Then run upstream `ce-data-integrity-guardian` for generic integrity checks
 
 Catching drift early prevents wasted review time on unrelated changes.

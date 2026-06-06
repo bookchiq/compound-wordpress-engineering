@@ -63,6 +63,40 @@ edit and the upstream plugin install — and that is where the plan concentrates
 | `rm` vs `trash` | Use **`trash`** for directory deletes (untracked-file safety + global preference). | Review M1 |
 | Git history / old repo | Never delete. Branch `overlay-migration`. | Spec |
 
+## Decision update (2026-06-06) — agent reclassification after verification + upstream check
+
+Verification (grep) + a clone of upstream's actual `ce-*` inventory **overturned the spec's
+review-agent lists.** Guiding principle (Sarah): *add a thin WP layer on top of upstream;
+never keep and maintain a fork of upstream's generic agents.* The test for each generic-named
+agent: **does upstream already ship the generic version?**
+
+- **Upstream HAS it → delete the fork** (upstream maintains generic; keep only WP value, and
+  only where not already covered by an existing `wp-*` reviewer):
+  - `security-sentinel` → **delete.** Its WP security checks are already fully in
+    `wp-php-reviewer`. Upstream `ce-security-sentinel` covers generic.
+  - `performance-oracle` → **delete the fork**, first **fold its extra WP perf checks into
+    `wp-php-reviewer`** (unbounded `WP_Query`/`posts_per_page => -1`, meta-cache, autoload
+    bloat, `query_posts`/`wp_reset_query`, AJAX loading WP).
+  - `pattern-recognition-specialist` → **delete the fork**, first **fold its WP hook/dead-code
+    note into `wp-hooks-reviewer`**.
+  - `data-integrity-guardian` → **delete** (zero WP content; upstream `ce-data-integrity-
+    guardian` owns it). *Resolves the spec-vs-audit conflict — drop it.*
+  - Plus the already-generic deletes: `agent-native-reviewer`, `architecture-strategist`,
+    `code-simplicity-reviewer`, `deployment-verification-agent`.
+- **Upstream LACKS it + it's real WP IP → keep as an additive `wp-*` agent** (rename for a
+  clear additive identity; Sarah confirmed rename):
+  - `call-chain-verifier` (100% WP) → **`wp-call-chain-reviewer`**
+  - `schema-drift-detector` (100% WP) → **`wp-schema-drift-reviewer`**
+  - `data-migration-expert` (WP-CLI/WP-Cron + AACRAO/SAIS/NAHMA IP) → **`wp-data-migration-reviewer`**
+
+**Forked command** `commands/workflows/review.md` → **delete**; upstream `ce-code-review`
+owns the workflow. Fold its WP-specific routing into the Tier-3 glue: run the `wp-phpcs` /
+`wp-phpstan` / `wp-eslint` skills, and send `dbDelta` / `$wpdb` schema PRs to
+`wp-schema-drift-reviewer`.
+
+Net: still ~11 review agents, but every kept agent is genuinely WP — no generic fork is
+retained or maintained.
+
 ## Target tree (the closed keep-set)
 
 After migration the repo contains **only**:
@@ -77,7 +111,8 @@ compound-wordpress-engineering/
     agents/review/                    (11) wp-ai-building-blocks-reviewer  wp-frontend-races-reviewer
                                            wp-gutenberg-reviewer  wp-hooks-reviewer  wp-javascript-reviewer
                                            wp-php-reviewer  wp-test-reviewer  wp-theme-reviewer
-                                           data-migration-expert  data-integrity-guardian  schema-drift-detector
+                                           wp-call-chain-reviewer  wp-schema-drift-reviewer  wp-data-migration-reviewer
+                                           (last 3 renamed from call-chain-verifier / schema-drift-detector / data-migration-expert)
     README.md                         (rewritten — overlay model)
     CHANGELOG.md                      (2.0.0 breaking-restructure entry added)
   README.md                           (root — trimmed to overlay)
